@@ -54,7 +54,7 @@ export default function Details() {
 const [deleteLoading, setdeleteLoading] = useState(false)
 
   const axiosInstance = UseAxios()
-  const BOOK_DETAIL = `http://127.0.0.1:8000/books/book_detail/${id}`
+  const BOOK_DETAIL = `https://lms-n8b3.onrender.com/books/book_detail/${id}`
 
 //   fetch book details
   const fetchDetail = async () => {
@@ -79,7 +79,7 @@ const [deleteLoading, setdeleteLoading] = useState(false)
 //   delete book
 const handleDelete = async() =>{
     setdeleteLoading(true)
-   await axiosInstance.delete(`http://127.0.0.1:8000/books/delete_book/${id}`)
+   await axiosInstance.delete(`https://lms-n8b3.onrender.com/books/delete_book/${id}`)
    .then(res =>{
     if (res.status === 200){
         Swal.fire({

@@ -54,7 +54,7 @@ export default function BookDetails() {
   const [error, setError] = useState(null)
 
   const axiosInstance = UseAxios()
-  const BOOK_DETAIL = `http://127.0.0.1:8000/books/book_detail/${id}`
+  const BOOK_DETAIL = `https://lms-n8b3.onrender.com/books/book_detail/${id}`
 
 //   fetch book details
   const fetchDetail = async () => {

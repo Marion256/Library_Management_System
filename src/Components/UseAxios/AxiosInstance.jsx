@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 
-const baseURL = 'http://127.0.0.1:8000';
+const baseURL = 'https://lms-n8b3.onrender.com';
 
 const UseAxios = () => {
   const { setUser, authTokens, setAuthTokens } = useContext(AuthContext);
