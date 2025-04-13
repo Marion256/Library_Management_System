@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../Sidebar/pages.css';
+import '../SideBar/pages.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-icons/font/bootstrap-icons.css"
 import { Link } from 'react-router-dom';
