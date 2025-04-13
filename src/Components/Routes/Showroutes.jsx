@@ -29,10 +29,10 @@ function ShowRoutes() {
       <Route path='/user/*' element={
         <PrivateRoute>
           <Routes>
-          <Route path='/home' element={<Home/>}></Route>
-          <Route path='/details/:id' element={<BookDetails/>}/>
-          <Route path='/profile' element={<UserProfile/>}/>
-          <Route path='/logout' element={<Logout/>}/>
+          <Route path='home' element={<Home/>}></Route>
+          <Route path='details/:id' element={<BookDetails/>}/>
+          <Route path='profile' element={<UserProfile/>}/>
+          <Route path='logout' element={<Logout/>}/>
           </Routes>
         </PrivateRoute>
       }/>

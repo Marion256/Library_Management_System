@@ -44,7 +44,7 @@ export default function BookManager() {
   const [booksPerPage] = useState(9);
   const [anchorEl, setAnchorEl] = useState(null);
 
-  // Load books data
+  // Load books data - runs only when listBooks or fetchBooks changes
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -53,12 +53,7 @@ export default function BookManager() {
           await fetchBooks();
         } else {
           setBooks(listBooks);
-          const results = books.filter(book => {
-            const fieldValue = String(book[searchBy]).toLowerCase();
-            return fieldValue.includes(searchTerm.toLowerCase());
-          });
-          setFilteredBooks(results);
-          setCurrentPage(1); 
+          setFilteredBooks(listBooks);
         }
       } catch (error) {
         console.error("Error loading books:", error);
@@ -69,9 +64,22 @@ export default function BookManager() {
       }
     };
     loadData();
-  }, [fetchBooks, listBooks, searchTerm, searchBy, books]);
+  }, [fetchBooks, listBooks]); // Removed books from dependencies
 
+  // Filter books - runs when searchTerm, searchBy, or books change
+  useEffect(() => {
+    if (!searchTerm.trim()) {
+      setFilteredBooks(books);
+      return;
+    }
 
+    const results = books.filter(book => {
+      const fieldValue = String(book[searchBy]).toLowerCase();
+      return fieldValue.includes(searchTerm.toLowerCase());
+    });
+    setFilteredBooks(results);
+    setCurrentPage(1);
+  }, [searchTerm, searchBy, books]);
 
   // Pagination calculations
   const indexOfLastBook = currentPage * booksPerPage;
@@ -92,7 +100,6 @@ export default function BookManager() {
   // Search dropdown handlers
   const handleOpenMenu = (event) => setAnchorEl(event.currentTarget);
   const handleCloseMenu = () => setAnchorEl(null);
-
 
   // Helper functions
   const getGenreColor = (genre) => ({
@@ -166,16 +173,14 @@ export default function BookManager() {
               }}
             />
             <Box>
-           
-          
-            <Button
-            variant="outlined"
-            className='bg-secondary text-white'
-            onClick={(e) => setAnchorEl(e.currentTarget)}
-            endIcon={<ArrowDropDownIcon />}
-          >
-            {searchBy}
-          </Button>
+              <Button
+                variant="outlined"
+                className='bg-secondary text-white'
+                onClick={(e) => setAnchorEl(e.currentTarget)}
+                endIcon={<ArrowDropDownIcon />}
+              >
+                {searchBy}
+              </Button>
               <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}

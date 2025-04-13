@@ -207,7 +207,7 @@ const Dashboard = () => {
                     Recent Reservations
                   </Typography>
                   <Paper sx={{ width: "100%", overflow: "hidden" }}>
-                    <Table sx={{ minWidth: 400 }}>
+                    <Table sx={{ minWidth: 400 }} className='table-responsive'>
                       <TableHead>
                         <TableRow>
                           <TableCell sx={{ fontWeight: 600 }}>Book</TableCell>

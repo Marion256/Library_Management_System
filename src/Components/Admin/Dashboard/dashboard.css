@@ -19,12 +19,18 @@
 @media screen and (max-width:768px){
     .reserve_row{
         margin-left:-20px;
+        width:350px;
     }
     .user_row{
         margin-left:-10px;
+        width:350px;
     }
     .user_reserve_table{
-        width:500px;
-        margin-left:-10px
+        margin-left:-10px;
+        width:100%;
+        overflow-x:scroll
+    }
+    .user_table_row{
+        width:100%;
     }
 }
