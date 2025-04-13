@@ -18,6 +18,7 @@ import ReservationTable from '../Admin/Reservations/Reservation'
 import BookDetails from '../User/DetailPage/PageDetail'
 import Profile from '../Admin/Profile/Profile'
 import UserProfile from '../User/UserProfile/UserProfile'
+import { UserReservations } from '../User/UserReservations/UserReservations'
 
 function ShowRoutes() {
   return (
@@ -32,6 +33,7 @@ function ShowRoutes() {
           <Route path='home' element={<Home/>}></Route>
           <Route path='details/:id' element={<BookDetails/>}/>
           <Route path='profile' element={<UserProfile/>}/>
+          <Route path='reservations' element={<UserReservations/>}/>
           <Route path='logout' element={<Logout/>}/>
           </Routes>
         </PrivateRoute>

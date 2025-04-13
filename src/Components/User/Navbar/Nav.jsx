@@ -28,9 +28,9 @@ function Nav() {
           </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">
+          <Link className="nav-link" to='/user/reservations'>
             Reservation
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to='/user/profile'>

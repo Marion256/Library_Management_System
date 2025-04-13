@@ -15,11 +15,13 @@
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
     "@mui/x-data-grid": "^7.28.3",
+    "@mui/x-date-pickers": "^7.28.3",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.5",
     "bootstrap-icons": "^1.11.3",
     "datatables.net": "^2.2.2",
     "datatables.net-bs4": "^2.2.2",
+    "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "jquery": "^3.7.1",
     "jwt-decode": "^4.0.0",
@@ -28,6 +30,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.5.0",
+    "react-select": "^5.10.1",
     "sweetalert2": "^11.17.2"
   },
   "devDependencies": {
