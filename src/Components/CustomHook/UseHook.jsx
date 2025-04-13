@@ -3,7 +3,7 @@ import axios from 'axios'
 import UseAxios from '../UseAxios/AxiosInstance'
 import {AuthContext} from '../Context/AuthProvider'
 
-const BASE_URL = 'http://127.0.0.1:8000/books/'
+const BASE_URL = 'https://lms-n8b3.onrender.com/books/'
 function useHook() {
   const {user} = useContext(AuthContext)
 const axiosInstance = UseAxios()

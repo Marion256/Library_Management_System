@@ -71,29 +71,7 @@ export default function BookManager() {
     loadData();
   }, [fetchBooks, listBooks, searchTerm, searchBy, books]);
 
-  // Filter books based on search criteria
-  // useEffect(() => {
-  //   if (!searchTerm.trim()) {
-  //     setFilteredBooks(books);
-  //     return;
-  //   }
 
-  //   const searchValue = searchTerm.trim().toLowerCase();
-  //   const filtered = books.filter(book => {
-  //     switch (searchBy) {
-  //       case "title":
-  //         return book.title?.toLowerCase().includes(searchValue);
-  //       case "author":
-  //         return book.author?.toLowerCase().includes(searchValue);
-  //       case "genre":
-  //         return book.genre?.toLowerCase().includes(searchValue);
-  //       default:
-  //         return true;
-  //     }
-  //   });
-  //   setFilteredBooks(filtered);
-  //   setCurrentPage(1); // Reset to first page when search changes
-  // }, [searchTerm, searchBy, books]);
 
   // Pagination calculations
   const indexOfLastBook = currentPage * booksPerPage;
@@ -188,20 +166,7 @@ export default function BookManager() {
               }}
             />
             <Box>
-            {/* <TextField
-            fullWidth
-            variant="outlined"
-            placeholder={`Search by ${searchBy}...`}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          /> */}
+           
           
             <Button
             variant="outlined"

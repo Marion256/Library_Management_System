@@ -40,7 +40,7 @@ import {
 import {AuthContext} from '../../Context/AuthProvider'
 import UseAxios from '../../UseAxios/AxiosInstance'
 
-const BASE_URL = 'http://127.0.0.1:8000/books/'
+const BASE_URL = 'https://lms-n8b3.onrender.com/books/'
 
 const Dashboard = () => {
   const {user} = useContext(AuthContext)

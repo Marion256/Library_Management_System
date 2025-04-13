@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 import '../Accounts/user.css';
 import UseAxios from '../../UseAxios/AxiosInstance';
 
-const BASE_URL = `http://127.0.0.1:8000/books/`;
+const BASE_URL = `https://lms-n8b3.onrender.com/books/`;
 const list_users = `${BASE_URL}list_users`;
 
 function Accounts() {

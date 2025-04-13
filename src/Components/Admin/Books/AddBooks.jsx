@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 import UseAxios from '../../UseAxios/AxiosInstance'
 
-const POST_BOOKS_API = 'http://127.0.0.1:8000/books/add_books'
+const POST_BOOKS_API = 'https://lms-n8b3.onrender.com/books/add_books'
 
 function AddBooks() {
     const axiosInstance = UseAxios()

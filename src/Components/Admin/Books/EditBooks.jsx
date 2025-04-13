@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import UseAxios from '../../UseAxios/AxiosInstance'
 import Swal from 'sweetalert2'
 
-const BASE_URL = 'http://127.0.0.1:8000/books/'
+const BASE_URL = 'https://lms-n8b3.onrender.com/books/'
 
 function EditBooks() {
     const { id } = useParams()

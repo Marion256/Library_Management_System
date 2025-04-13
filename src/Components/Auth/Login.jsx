@@ -7,7 +7,7 @@ import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 import Swal from 'sweetalert2'
 
-const login = 'http://127.0.0.1:8000/books/login'
+const login = 'https://lms-n8b3.onrender.com/books/login'
 
 function Login() {
 const { setUser} = useContext(AuthContext);
@@ -15,10 +15,7 @@ const { setUser} = useContext(AuthContext);
   const [noActive, setNoActive] = useState('');
   const [userLogin, setUserLogin] = useState({ username: "", password: "" });
   const [loader, setLoader] = useState(false);
-//   const [link, setLink] = useState({ email: "" });
-//   const [status, setStatus] = useState(false)
-//   const [showModal, setShowModal] = useState(false);
-//   const [userProfile, setUserProfile] = useState(null);
+
   const navigate = useNavigate();
 
   const handleChange = (e)=>{
