@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
-const register = 'http://127.0.0.1:8000/books/register';
+const register = 'https://lms-n8b3.onrender.com/books/register';
 
 function Signup() {
     const navigate = useNavigate()
@@ -55,7 +55,7 @@ function Signup() {
                 showConfirmButton: false,
             });
         }
-        navigate('/login')
+        navigate('/')
       }).catch(err =>{
         setLoad(false)
         setUserError(err.response.data.email)
@@ -158,7 +158,7 @@ function Signup() {
     <div id="formError" className="error-message" />
   </form>
   <p className="login-link">
-    Already have an account? <Link to='/login'>Login here</Link>
+    Already have an account? <Link to='/'>Login here</Link>
   </p>
 </div>
     </div>

@@ -15,7 +15,7 @@ function Logout() {
             confirmButtonText: 'OK'
         }).then(() => {
             logoutUser(); // Call the context logout function
-            navigate('/login'); // Redirect after logout
+            navigate('/'); // Redirect after logout
         });
     }, [logoutUser, navigate]);
 

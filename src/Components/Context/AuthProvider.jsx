@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem('authtokens');
     localStorage.removeItem('lastPath');
-    navigate('/login');
+    navigate('/');
   };
 
   const contextData = {

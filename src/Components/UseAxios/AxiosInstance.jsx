@@ -60,7 +60,7 @@ const UseAxios = () => {
           timer: 6000,
           confirmButtonText: 'OK'
         });
-        window.location.href = '/login';
+        window.location.href = '/';
         return Promise.reject(error);
       }
     });
