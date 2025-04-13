@@ -280,7 +280,7 @@ export function UserReservations() {
                           label={reservation.status} 
                           color={
                             reservation.status === 'Pending' ? 'warning' : 
-                            reservation.status === 'Completed' ? 'success' : 'error'
+                            reservation.status === 'Taken' ? 'secondary' : 'success'
                           }
                         />
                       </TableCell>
