@@ -44,7 +44,7 @@ export default function BookManager() {
   const [booksPerPage] = useState(9);
   const [anchorEl, setAnchorEl] = useState(null);
 
-  // Load books data - runs only when listBooks or fetchBooks changes
+  // Load books data
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -53,7 +53,7 @@ export default function BookManager() {
           await fetchBooks();
         } else {
           setBooks(listBooks);
-          setFilteredBooks(listBooks);
+          // setFilteredBooks(listBooks);
         }
       } catch (error) {
         console.error("Error loading books:", error);
@@ -64,24 +64,34 @@ export default function BookManager() {
       }
     };
     loadData();
-  }, [fetchBooks, listBooks]); // Removed books from dependencies
+  }, [fetchBooks, listBooks]);
 
-  // Filter books - runs when searchTerm, searchBy, or books change
-  useEffect(() => {
-    if (!searchTerm.trim()) {
-      setFilteredBooks(books);
-      return;
-    }
+   useEffect(() => {
+      const results = books.filter(book => {
+        const fieldValue = String(book[searchBy]).toLowerCase();
+        return fieldValue.includes(searchTerm.toLowerCase());
+      });
+      setFilteredBooks(results);
+      setCurrentPage(1); // Reset to first page on new search
+    }, [searchTerm, searchBy, books]);
 
-    const results = books.filter(book => {
-      const fieldValue = String(book[searchBy]).toLowerCase();
-      return fieldValue.includes(searchTerm.toLowerCase());
-    });
-    setFilteredBooks(results);
-    setCurrentPage(1);
-  }, [searchTerm, searchBy, books]);
+  // Filter books based on search criteria
+  // useEffect(() => {
+  //   if (!searchTerm.trim()) {
+  //     setFilteredBooks(books);
+  //     return;
+  //   }
 
-  // Pagination calculations
+  //   const searchValue = searchTerm.trim().toLowerCase();
+  //   const filtered = books.filter(book => {
+  //     const fieldValue = String(book[searchBy]).toLowerCase();
+  //     return fieldValue.includes(searchValue);
+  //   });
+  //   setFilteredBooks(filtered);
+  //   setCurrentPage(1);
+  // }, [searchTerm, searchBy, books]);
+
+  // Pagination
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
@@ -92,33 +102,45 @@ export default function BookManager() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Search dropdown handlers
+  const handleOpenMenu = (event) => setAnchorEl(event.currentTarget);
+  const handleCloseMenu = () => setAnchorEl(null);
   const handleSearchByChange = (value) => {
     setSearchBy(value);
     setAnchorEl(null);
   };
 
-  // Search dropdown handlers
-  const handleOpenMenu = (event) => setAnchorEl(event.currentTarget);
-  const handleCloseMenu = () => setAnchorEl(null);
-
   // Helper functions
-  const getGenreColor = (genre) => ({
-    Classic: "#8884d8",
-    Fiction: "#82ca9d",
-    Dystopian: "#ff8042",
-    Romance: "#ff6b81",
-    Fantasy: "#6a0dad",
-    "Coming-of-age": "#f4a261",
-    Adventure: "#2a9d8f",
-    Historical: "#e9c46a",
-    Epic: "#457b9d",
-  }[genre] || "#1976d2");
+  const getGenreColor = (genre) => {
+    const genreMap = {
+      Classic: "#8884d8",
+      Fiction: "#82ca9d",
+      Dystopian: "#ff8042",
+      Romance: "#ff6b81",
+      Fantasy: "#6a0dad",
+      "Coming-of-age": "#f4a261",
+      Adventure: "#2a9d8f",
+      Historical: "#e9c46a",
+      Epic: "#457b9d",
+      Programming: "#1976d2",
+      math: "#9c27b0",
+      classic: "#8884d8",
+    };
+    return genreMap[genre] || "#1976d2";
+  };
 
-  const getStatusInfo = (status) => ({
-    "Available": { icon: <CheckCircleIcon fontSize="small" />, color: "#2e7d32", text: "Available" },
-    "Checked Out": { icon: <XCircleIcon fontSize="small" />, color: "#d32f2f", text: "Checked Out" },
-    "Reserved": { icon: <ClockIcon fontSize="small" />, color: "#ed6c02", text: "Reserved" },
-  }[status] || { icon: <CheckCircleIcon fontSize="small" />, color: "#2e7d32", text: "Available" });
+  const getStatusInfo = (status) => {
+    switch (status) {
+      case "Available":
+        return { icon: <CheckCircleIcon fontSize="small" />, color: "#2e7d32", text: "Available" };
+      case "Checked Out":
+        return { icon: <XCircleIcon fontSize="small" />, color: "#d32f2f", text: "Checked Out" };
+      case "Reserved":
+        return { icon: <ClockIcon fontSize="small" />, color: "#ed6c02", text: "Reserved" };
+      default:
+        return { icon: <CheckCircleIcon fontSize="small" />, color: "#2e7d32", text: "Available" };
+    }
+  };
 
   const getAvatarLetter = (title) => title?.charAt(0)?.toUpperCase() || "B";
 
@@ -175,11 +197,20 @@ export default function BookManager() {
             <Box>
               <Button
                 variant="outlined"
-                className='bg-secondary text-white'
-                onClick={(e) => setAnchorEl(e.currentTarget)}
+                onClick={handleOpenMenu}
                 endIcon={<ArrowDropDownIcon />}
+                sx={{
+                  color: "white",
+                  borderColor: "rgba(255,255,255,0.3)",
+                  bgcolor: "rgba(255,255,255,0.15)",
+                  "&:hover": {
+                    borderColor: "rgba(255,255,255,0.5)",
+                    bgcolor: "rgba(255,255,255,0.3)",
+                  },
+                  textTransform: "none",
+                }}
               >
-                {searchBy}
+                Search by {searchBy.charAt(0).toUpperCase() + searchBy.slice(1)}
               </Button>
               <Menu
                 anchorEl={anchorEl}
