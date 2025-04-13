@@ -35,7 +35,7 @@ import {
 import UseAxios from "../../UseAxios/AxiosInstance"
 import Swal from "sweetalert2"
 
-const BASE_URL = 'http://127.0.0.1:8000/books/'
+const BASE_URL = 'https://lms-n8b3.onrender.com/books/'
 
 const statusOptions = [
   { value: "Returned", label: "Returned", color: "success" },
@@ -45,8 +45,6 @@ const statusOptions = [
 ];
 
 export default function ReservationTable({
-  onSelectReservation = () => {},
-  onDeleteReservation = () => {},
 }) {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)

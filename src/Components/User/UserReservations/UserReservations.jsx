@@ -45,7 +45,7 @@ import UseAxios from "../../UseAxios/AxiosInstance";
 import Swal from "sweetalert2";
 import Nav from "../Navbar/Nav";
 
-const BASE_URL = 'http://127.0.0.1:8000/books/';
+const BASE_URL = 'https://lms-n8b3.onrender.com/books/';
 
 export function UserReservations() {
     const axiosInstance = UseAxios()
