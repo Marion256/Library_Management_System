@@ -34,8 +34,6 @@ import {
   CheckCircle as CheckCircleIcon,
   Cancel as XCircleIcon,
   Schedule as ClockIcon,
-  Edit as EditIcon,
-  Delete as DeleteIcon,
   Person as PersonIcon,
   CalendarMonth as CalendarIcon,
   Language as LanguageIcon,
@@ -44,7 +42,6 @@ import {
   LocalLibrary as LocalLibraryIcon,
 } from "@mui/icons-material"
 import UseAxios from "../../UseAxios/AxiosInstance"
-import Swal from "sweetalert2"
 
 export default function BookDetails() {
     const navigate = useNavigate()
@@ -383,20 +380,6 @@ export default function BookDetails() {
         </CardContent>
       </Card>
 
-      {/* Borrowing History Section */}
-      <Paper elevation={3} sx={{ p: 3, borderRadius: "12px" }}>
-        <Typography variant="h6" component="h3" sx={{ fontWeight: 600, mb: 2 }}>
-          Borrowing History
-        </Typography>
-
-        <Alert severity="info" sx={{ mb: 2 }}>
-          This book has not been borrowed yet.
-        </Alert>
-
-        <Button component={Link} to="/user/home" startIcon={<ArrowBackIcon />} variant="contained" sx={{ mt: 2 }}>
-          Back to Book List
-        </Button>
-      </Paper>
     </Container>
     </>
   )

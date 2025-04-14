@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { 
   Avatar, 
   Button, 
@@ -17,8 +17,15 @@ import {
   Typography,
   Box,
   Skeleton,
-  CircularProgress
+  CircularProgress,
+  Paper,
+  Alert
 } from "@mui/material"
+import {
+  ArrowBack as ArrowBackIcon,
+  Book as BookIcon
+} from "@mui/icons-material"
+
 import { AuthContext } from '../../Context/AuthProvider';
 import UseAxios from '../../UseAxios/AxiosInstance';
 import moment from 'moment'
@@ -26,17 +33,37 @@ import useHook from '../../CustomHook/UseHook';
 // import '../Profile/profile.css'
 import Nav from "../Navbar/Nav";
 
+const BORROWED_BOOKS = 'http://127.0.0.1:8000/books/borrowed_books'
+
 export default function UserProfile() {
   const [showEditDialog, setShowEditDialog] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [borrowedBooks, setBorrowedBooks] = useState([])
   const { user } = useContext(AuthContext);
   const axiosInstance = UseAxios();
   const { person, setPerson, dateFormat, isLoading } = useHook();
-
+  const [loader, setLoader] = useState(false)
 
   const relativeTime = moment(person.date_joined).fromNow();
   const navigate = useNavigate()
 
+  // fetch borrowed books
+  const fetchBorrowedBooks = async()=>{
+     try{
+      setLoader(true)
+      const response = await axiosInstance.get(BORROWED_BOOKS)
+      const data = response.data
+      console.log(data)
+      setBorrowedBooks(data)
+      setLoader(false)
+     }catch(err){
+      console.log('failed to fetch borrowed books', err)
+     }
+  }
+
+  useEffect(()=>{
+    fetchBorrowedBooks()
+  }, [])
 
   const handleUser = (e) => {
     const { name, value } = e.target;
@@ -216,6 +243,44 @@ export default function UserProfile() {
           </DialogContent>
         </Dialog>
       )}
+
+       {/* Borrowing History Section */}
+       <Paper elevation={3} sx={{ p: 3, borderRadius: "12px" }} className="mt-3">
+        <Typography variant="h6" component="h3" sx={{ fontWeight: 600, mb: 2 }}>
+          Borrowing History
+        </Typography>
+
+        {loader ? (<CircularProgress/>) : (
+          <>
+              {borrowedBooks?.length === 0 && (
+                <Alert severity="info" sx={{ mb: 2 }}>
+                This book has not been borrowed yet.
+              </Alert>
+             )} 
+
+             {borrowedBooks.map(books =>{
+              const {id, book} = books
+              return (
+                <>
+                <Box className='d-flex' gap={5}>
+                <Typography variant="body2" component="h5" sx={{ fontWeight: 400, mb: 2 }}>
+                  <BookIcon/> {book.title}
+              </Typography>
+
+              <Typography variant="body1" component="h5" sx={{ fontWeight: 100, mb: 2 }}>
+                 Borrowed {borrowedBooks.filter(borrowed => borrowed.book.title === book.title).length} times
+              </Typography>
+                </Box>
+                </>
+              )
+             })}
+          </>
+        )}
+
+        <Button component={Link} to="/user/home" startIcon={<ArrowBackIcon />} variant="contained" sx={{ mt: 2 }}>
+          Back to Book List
+        </Button>
+      </Paper>
     </Box>
     </>
   )
