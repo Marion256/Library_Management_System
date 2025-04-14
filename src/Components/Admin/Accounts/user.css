@@ -55,9 +55,10 @@
     }
     .doc_manage table {
         width: 100%;
-    
-    }
-    .doctor_table{
-        width: 100%;
+        
+      }
+      .doctor_table{
+        width: 350px;
+        margin-left: -50px;
     }
 }
